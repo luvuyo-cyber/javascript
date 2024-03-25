@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chapter 9 project</title>
+</head>
+
+<body>
+
+    <div class="output">
+        <h1>Hello</h1>
+        <div>Test</div>
+        <ul>
+            <li id="one">One</li>
+            <li class="red">Two</li>
+        </ul>
+        <div>Test</div>
+    </div>
+
+    <script>
+
+        let element = document.querySelector(".output");
+        let mainList = element.querySelector("ul");
+        mainList.id = "mainList";
+        console.log(mainList);
+        let divTag = document.querySelectorAll("div");
+        console.log(divTag);
+
+        for (i = 0; i < divTag.length; i++) {
+            divTag[i].id = "id" + (i + 1);
+
+            if (i % 2) {
+                divTag[i].style.color = "red";
+            } else {
+                divTag[i].style.color = "blue";
+            };
+        };
+
+    </script>
+</body>
+
+</html>
