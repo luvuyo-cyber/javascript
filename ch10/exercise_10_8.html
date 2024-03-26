@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <div id="message" onclick="build()"></div>
+    <div id="message"></div>
     <div id="output"></div>
     <script>
         let namesArr = [
@@ -21,6 +21,11 @@
             "jane"
         ];
 
+        let message = document.getElementById("message");
+        let output = document.getElementsByClassName("output");
+
+        build();
+
         function build() {
             let html = "<h1>table</h1><table>";
             namesArr.forEach((e, i) => {
@@ -30,9 +35,11 @@
             document.getElementsByTagName("div")[0].innerHTML = html;
         };
         
-        function getData() {
-
-        }
+        function getData(i) {
+            let rowValue = i.getAttribute("data-row");
+            let textOutput = i.getAttribute("data-name");
+            message.innerHTML = `row:${rowValue} has value:${textOutput}`
+        };
     </script>
 </body>
 

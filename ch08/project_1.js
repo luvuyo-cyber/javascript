@@ -1,16 +1,15 @@
-let str = "JavaScript";
+let str = "quintessential";
 
-function scramble(val) {
-    let max = val.length;
+function scramble(x) {
+    let strLength = x.length;
     let temp = "";
-    for (let i = 0; i < max; i++) {
-        console.log(val.length);
-        let index = Math.floor(Math.random() * val.length);
-        temp += val[index];
+    for (let i = 0; i < strLength; i++) {
+        let ranIndex = Math.floor(Math.random() * x.length);
+        temp += x[ranIndex];
         console.log(temp);
-        val = val.substr(0, index) + val.substr(index + 1);
-        console.log(val);
-    }
+        x = x.slice(0, ranIndex) + x.slice(ranIndex + 1);
+        console.log(x);
+    };
     return temp;
-}
+};
 console.log(scramble(str));
