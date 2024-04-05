@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Complete JavaScript Course</title>
+</head>
+
+<body>
+    <!-- This is a message displayed on the webpage -->
+    <div id="message">Complete JavaScript Course</div>
+    <div>
+        <!-- text input field-->
+        <input type="text" id="addFriend">
+        <!-- This is a button that, when clicked, adds the typed name to a list -->
+        <input type="button" id="addNew" value="Add Friend">
+    </div>
+    <!-- This is a table where the list of friends will be displayed -->
+    <table id="output"></table>
+    <script>
+        // This function is called when the webpage loads
+        window.onload = build;
+        // This is an array of friend's names
+        let myArray = ["mandla", "lwandle", "simbi", "sipho"];
+        // These are references to the HTML elements on the webpage
+        let message = document.getElementById("message");
+        let addNew = document.getElementById("addNew");
+        let newInput = document.getElementById("addFriend");
+        let output = document.getElementById("output");
+        // This function is called when the "Add Friend" button is clicked
+        addNew.onclick = function () {
+            // It gets the typed name, adds it to the list, and updates the table
+            let newFriend = newInput.value;
+            adder(newFriend, myArray.length, 0);
+            myArray.push(newFriend);
+        }
+        // This function is called when the webpage loads
+        function build() {
+            // It adds each friend in the array to the table
+            myArray.forEach((item, index) => {
+                adder(item, index, 0);
+            });
+        }
+        // This function adds a friend to the table
+        function adder(name, index, counter) {
+            // It creates a new row and three cells
+            let tr = document.createElement("tr");
+            let td1 = document.createElement("td");
+            td1.classList.add("box");
+            td1.textContent = index + 1;
+            let td2 = document.createElement("td");
+            td2.textContent = name;
+            let td3 = document.createElement("td");
+            td3.textContent = counter;
+            // It adds the cells to the row
+            tr.append(td1);
+            tr.append(td2);
+            tr.append(td3);
+            // This function is called when the row is clicked
+            tr.onclick = function () {
+                // It increases the counter for the clicked row
+                console.log(tr.lastChild);
+                let val = Number(tr.lastChild.textContent);
+                val++;
+                tr.lastChild.textContent = val;
+            }
+            // It adds the row to the table
+            output.appendChild(tr);
+        }
+    </script>
+
+</body>
+
+</html>

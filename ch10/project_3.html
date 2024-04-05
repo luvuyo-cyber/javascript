@@ -1,0 +1,140 @@
+<!doctype html>
+<html><head>
+    <title>Hangman Game</title>
+    <style>
+
+        .gameArea {
+            text-align: center;
+            font-size: 2em;
+        }
+        .box,
+        .boxD {
+            display: inline-block;
+            padding: 5px;
+        }
+        .boxE {
+            display: inline-block;
+            width: 40px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <!-- Game area with score, puzzle, letters, and start game button -->
+    <div class="gameArea">
+        <div class="score"> </div>
+        <div class="puzzle"></div>
+        <div class="letters"></div>
+        <button>Start Game</button>
+    </div>
+    <script>
+        /* Game object to hold current word, solution, puzzle, and total letters left */
+        const game = { cur: "", solution: "", puzz: [], total: 0 };
+
+        /* Array of words for the game */
+        const myWords = ["learn Javascript", "learn html", "learn css"];
+
+        /* Selecting score, puzzle, letters, and button elements from the DOM */
+        const score = document.querySelector(".score");
+        const puzzle = document.querySelector(".puzzle");
+        const letters = document.querySelector(".letters");
+        const btn = document.querySelector("button");
+
+        /* Adding click event listener to start game button */
+        btn.addEventListener("click", startGame);
+
+        /* Function to start the game */
+        function startGame() {
+            /* Check if there are words left in the array */
+            if (myWords.length > 0) {
+
+                /* Hide the start game button, reset the puzzle and total, get the next word from the array, and split it into an array of letters */
+                btn.style.display = "none";
+                game.puzz = [];
+                game.total = 0;
+                game.cur = myWords.shift();
+                game.solution = game.cur.split("");
+
+                /* Build the puzzle and letters */
+                builder();
+                
+            } else {
+                /* If no words left, display "No More Words." */
+                score.textContent = "No More Words.";
+            }
+        }
+        /* Function to create HTML elements */
+        function createElements(elType, parentEle, output, cla) {
+            /* Create a new element, add class, append it to the parent element, set its text content, and return it */
+            const temp = document.createElement(elType);
+            temp.classList.add("boxE");
+            parentEle.append(temp);
+            temp.textContent = output;
+            return temp;
+        }
+        /* Function to update the score */
+        function updateScore() {
+            /* Update the score text content with the total letters left */
+            score.textContent = `Total Letters Left : ${game.total}`;
+            /* If no letters left, display "Game Over" and show the start game button */
+            if (game.total <= 0) {
+                console.log("game over");
+                score.textContent = "Game Over";
+                btn.style.display = "block";
+            }
+        }
+        /* Function to build the puzzle and letters */
+        function builder() {
+            /* Clear the letters and puzzle */
+            letters.innerHTML = "";
+            puzzle.innerHTML = "";
+            /* For each letter in the solution, create a box in the puzzle */
+            game.solution.forEach((lett) => {
+                let div = createElements("div", puzzle, "-", "boxE");
+                /* If the letter is a space, make the box border white and set the text content to a space */
+                if (lett == " ") {
+                    div.style.borderColor = "white";
+                    div.textContent = " ";
+                } else {
+                    /* If the letter is not a space, increment the total letters left */
+                    game.total++;
+                }
+                /* Add the box to the puzzle array and update the score */
+                game.puzz.push(div);
+                updateScore();
+            });
+            /* Create a box for each letter of the alphabet in the letters area */
+            for (let i = 0; i < 26; i++) {
+                let temp = String.fromCharCode(65 + i);
+                let div = createElements("div", letters, temp,"box");
+                /* Add a click event listener to each letter box */
+                let checker = function (e) {
+                    /* On click, change the box background color, change the class, remove the click event listener, and check the letter */
+                    div.style.backgroundColor = "#ddd";
+                    div.classList.remove("box");
+                    div.classList.add("boxD");
+                    div.removeEventListener("click", checker);
+                    checkLetter(temp);
+                }
+                div.addEventListener("click", checker);
+            }
+        }
+        /* Function to check a letter */
+        function checkLetter(letter) {
+            /* Log the letter */
+            console.log(letter);
+            /* For each letter in the solution, if it matches the clicked letter, update the corresponding box in the puzzle and decrement the total letters left */
+            game.solution.forEach((ele, index) => {
+                if (ele.toUpperCase() == letter) {
+                    game.puzz[index].textContent = letter;
+                    game.total--;
+                    updateScore();
+                };
+            });
+        }
+    </script>
+
+</body>
+</html>

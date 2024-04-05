@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Complete JavaScript Course</title>
+</head>
+
+<body>
+    <div id="message"></div>
+    <div id="output"></div>
+    <script>
+        let namesArr = [
+            "laurence",
+            "mike",
+            "john",
+            "larry",
+            "kim",
+            "joanne",
+            "lisa",
+            "janet",
+            "jane"
+        ];
+
+        let message = document.getElementById("message");
+        let output = document.getElementsByClassName("output");
+
+        build();
+
+        function build() {
+            let html = "<h1>table</h1><table>";
+            namesArr.forEach((e, i) => {
+                html += `<tr class="box" data-row="${i}" data-name="${e}" onclick="getData(this)"><td>${e}</td><td>${i}</td></tr>`;
+            });
+            html += "</table>";
+            document.getElementsByTagName("div")[0].innerHTML = html;
+        };
+        
+        function getData(i) {
+            let rowValue = i.getAttribute("data-row");
+            let textOutput = i.getAttribute("data-name");
+            message.innerHTML = `row:${rowValue} has value:${textOutput}`
+        };
+    </script>
+</body>
+
+</html>

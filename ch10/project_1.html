@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>JS Tester</title>
+    <style>
+        .active {
+            display: block !important;
+        }
+
+        .myText {
+            display: none;
+        }
+
+        .title {
+            font-size: 1.5em;
+            background-color: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">Title #1</div>
+        <div class="myText">Just some text #1</div>
+        <div class="title">Title #2</div>
+        <div class="myText">Just some text #2</div>
+        <div class="title">Title #3</div>
+        <div class="myText">Just some text #3</div>
+    </div>
+    <script>
+        let titleClass = document.querySelectorAll(".title");
+        let myTextClass = document.querySelectorAll(".myText");
+
+        titleClass.forEach((el) => { //iterates through each element
+            el.addEventListener("click", (e) => {  // for each element an event listener is added for the click event
+                console.log(el.nextElementSibling); // logs the next sibling element to console. the text element
+                remover(); // calls function to remove the active class from all text elements. hiding them
+                el.nextElementSibling.classList.toggle("active"); //toggles the active class to next sibling element of clicked element el
+            });     //adding active class makes it visible
+        });
+        function remover() { //removes the active class from all elements
+            myTextClass.forEach((ele) => { //iterates through each element
+                ele.classList.remove("active"); //for each element ele the active class is removed
+            });
+        }; //remover functon makes sure only one text element is visible at a time
+    </script>
+</body>
+
+</html>
+
+<!-- <!doctype html>
+<html>
+
+<head>
+    <title>JS Tester</title>
+    <style>
+        .active {
+            display: block !important;
+        }
+
+        .myText {
+            display: none;
+        }
+
+        .title {
+            font-size: 1.5em;
+            background-color: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">Title #1</div>
+        <div class="myText">Just some text #1</div>
+        <div class="title">Title #2</div>
+        <div class="myText">Just some text #2</div>
+        <div class="title">Title #3</div>
+        <div class="myText">Just some text #3</div>
+    </div>
+    <script>
+    </script>
+</body>
+
+</html> -->
