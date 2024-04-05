@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+    <title>Document</title>
+</head>
+<body>
+    <div class="output"></div>
+    <input type="text" name="message" placeholder="Your Message">
+    <button class="btn1">Button 1</button>
+    <button class="btn2">Button 2</button>
+    <div>
+        <button class="btn3">Log</button>
+    </div>
+    <script>
+       let myInput = document.querySelector("input[name='message']");
+       let output = document.querySelector(".output");
+       let btn1 = document.querySelector(".btn1");
+       let btn2 = document.querySelector(".btn2");
+       let btn3 = document.querySelector(".btn3");
+       let log = [];
+        btn1.addEventListener("click", tracking);
+        btn2.addEventListener("click", tracking);
+        btn3.addEventListener("click", (e) => {
+            console.log(log);
+        });
+        function tracking(e) {
+            output.textContent = myInput.value;
+           let event = e.target;
+            console.dir(event);
+           let temp = {
+                message: myInput.value,
+                type: event.type,
+                class: event.className,
+                tag: event.tagName
+            };
+            log.push(temp);
+            myInput.value = "";
+        };
+    </script>
+
+</body>
+</html>

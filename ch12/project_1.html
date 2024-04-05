@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Complete JavaScript Course</title>
+</head>
+<body>
+    <textarea id="txtarea" rows="2" cols="50"></textarea>
+    <button id="getEmailsBtn">Get Emails</button>
+    <textarea id="txtarea2" rows="2" cols="50"></textarea>
+
+    <script>
+        const firstArea = document.getElementById("txtarea");
+        const secArea = document.getElementById("txtarea2");
+        const getEmailsBtn = document.getElementById("getEmailsBtn");
+
+        getEmailsBtn.addEventListener("click", lookUp);
+
+        function lookUp() {
+            const rawTxt = firstArea.value;
+            const eData = rawTxt.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
+            if (eData) {
+                const uniqueEmails = [...new Set(eData)];
+                secArea.value = uniqueEmails.join(',');
+            } else {
+                secArea.value = "No emails found.";
+            }
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,63 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="divvy" style="width: 100px; height:100px; background-color: pink;"></div>
+    <script>
+        window.onload = function doneNow() {
+            console.log("hi");
+            document.getElementById("divvy").addEventListener("mousedown", function() {changeColor(this, "green");});
+            document.getElementById("divvy").addEventListener("mouseup", function() {changeColor(this, "yellow");});
+            document.getElementById("divvy").addEventListener("dblclick", function() {changeColor(this, "black");});
+            document.getElementById("divvy").addEventListener("mouseout", function() {changeColor(this, "blue");});
+        };
+        console.log("hi2");
+        let changeColor = (el, color) => {
+            el.style.backgroundColor = color;
+        };
+    </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="divvy"></div>
+    <script>
+        let divvy = document.querySelector(".divvy");
+        divvy.textContent = "hello world";
+        divvy.style.height = "200px";
+        divvy.style.width = "300px";
+        divvy.style.backgroundColor = "aquamarine";
+
+        let mouseMove = (color, event) => {
+            // console.log(color);
+            console.log(event.type);
+            divvy.style.backgroundColor = color;
+        };
+
+        divvy.addEventListener("mousedown", (eve) => {
+            mouseMove("yellow", eve);
+        });
+        divvy.addEventListener("mouseover", (eve) => {
+            mouseMove("green", eve);
+        });
+        divvy.addEventListener("mouseout", (eve) => {
+            mouseMove("red", eve);
+        });
+        divvy.addEventListener("mouseup", (eve) => {
+            mouseMove("orange", eve);
+        });
+
+    </script>
+</body>
+</html>
